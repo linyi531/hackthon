@@ -84,23 +84,22 @@ html, body {
 	width: 100%; 
 	height: 100vh; 
 	overflow: hidden; 
-	transition: transform .6s ease; 
+  transition: transform .6s ease; 
+  background: url('../images/onion/background.png')
 }
 
 .game-back {
 	position: absolute; 
 	z-index: 1; 
 	top: 0; 
-	left: 0; 
-	width: 100%; 
-	height: 40px; 
-	line-height: 40px; 
-	text-align: center; 
-	background-color: #efefef; 
-	box-shadow: 0 0px 10px rgba(0, 0, 0, .2); 
+  left: 0; 
+  width: 100%;
+  height: 60px;
+  background: url('../images/onion/learn_top_controller.png');
+  background-size: 100%;
 }
 
-.game-back::before {
+/* .game-back::before {
 	content: ''; 
 	position: absolute; 
 	width: 100%; 
@@ -121,7 +120,8 @@ html, body {
 	top: 12px; 
 	left: 10px; 
 	transform: rotate(315deg);
-}
+} */
+
 
 .easel {
 	position: relative; 
@@ -149,6 +149,125 @@ html, body {
 {
 	color: #e11222; 
 }
+.index {
+  background: url(../images/onion/cover_background.png);
+  background-size: 100%;
+}
+.img-title {
+  margin-top: 101px;
+  width: 100%;
+  height: auto;
+}
+.img-learn {
+  margin: 48px auto 0;
+  width: 169px;
+  height: 52px;
+  display: block;
+}
+.img-quiz {
+  display: block;
+  margin: 18px auto 0;
+  width: 169px;
+  height: 52px;
+}
+.video-contain {
+  position: absolute; 
+	top: 0; 
+	left: 100%; 
+	width: 100%; 
+	height: 100vh; 
+	overflow: hidden; 
+  transition: transform .6s ease;
+  background: url(../images/onion/background.png);
+  background-size: 100%;
+}
+#video {
+  width: 100%;
+  object-fit: fill;
+  margin: 200px auto;
+}
+.tip-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 180px;
 
-
-
+}
+.tip-bottom img {
+  width: 100%;
+  height: 180px;
+  display: none;
+}
+#pass {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(7, 7, 11, 0.6);
+  display: none;
+  z-index: 10;
+}
+#pass img {
+  width: 240px;
+  height: auto;
+  margin: 174px auto 0;
+  display: block;
+}
+.tip-button {
+  width: 310px;
+  height: 48px;
+  position: absolute;
+  top: 414px;
+  left: 50%;
+  margin-left: -150px;
+  display: none;
+}
+.tip-button img {
+  width: 142px;
+  height: 48px;
+}
+.tip-button .second-img {
+  margin-left: 18px;
+} 
+.three-button {
+  width: 320px;
+  height: 48px;
+  position: absolute;
+  top: 414px;
+  left: 50%;
+  margin-left: -160px;
+  display: none;
+}
+.three-button img {
+  width: 90px;
+  height: 48px;
+}
+.three-button .second-button {
+  margin-left: 18px;
+} 
+.three-button .third-button {
+  margin-left: 18px;
+} 
+.tip-button .special-one {
+  width: 92px;
+}
+.tip-button .special-two {
+  width: 192px;
+} 
+#share {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url('../images/onion/share.png');
+  background-size: 100%;
+  display: none;
+}
+#share img {
+  position: absolute;
+  bottom: 0;
+  height: 80px;
+  width: 100%;
+}

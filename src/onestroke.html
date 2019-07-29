@@ -1,186 +1,357 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <title>H5小游戏100例: 一笔画</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" />
-  <link href="css/onstroke.css" rel="stylesheet">
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <title>H5小游戏100例: 一笔画</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
+    />
+    <link href="css/onstroke.css" rel="stylesheet" />
+  </head>
 
-<body>
-	<div class="wrapper">
-		<!-- 关卡列表 -->
-		<ul class="levels" id="levels">
-			<!-- <li class="level">
-				<span class="level-no">001</span>
-				<span class="level-name">第一关</span>
-				<div class="level-arrow"></div>
-			</li> -->
-		</ul>
-		<div class="game" id="game">
-			<div class="game-back" id="gameBack"></div>
-			<canvas id="easel" width="375" height="603" class="easel"></canvas>
-			<div class="game-control">
-				<div class="game-control-reset">重新开始</div>
-				<div class="game-control-rollback">回退</div>
-			</div>
-		</div>
-	</div>
-</body>
-<script type="text/javascript" src="script/lib/pixi.js"></script>
-<script type="text/javascript" src="script/lib/gsap/TweenMax.js"></script>
-<script type="text/javascript" src="script/onestroke.js"></script>
-<script type="text/javascript">
-let onestroke = new OneStroke(
-	{
-		// 默认的线段颜色与端点颜色
-		lineColor: 0xe2e2e2, 
-		vertexColor: 0x6dc6c0, 
-		strokeColor: 0x416275, 
-		activeVertexColor: 0x6dc6c0, 
-		levels: [
-			{
-				name: "第一关", 
-				lineColor: 0xe2e2e2, 
-				vertexColor: 0x90b34f, 
-				strokeColor: 0x445624, 
-				activeVertexColor: 0x90b34f, 
-				lines: [
-					{"x1": 375, "y1": 366, "x2": 200, "y2": 916},
-					{"x1": 200, "y1": 916, "x2": 664, "y2": 576}, 
-					{"x1": 664, "y1": 576, "x2": 88, "y2": 576}, 
-					{"x1": 88, "y1": 576, "x2": 556, "y2": 916}, 
-					{"x1": 556, "y1": 916, "x2": 375, "y2": 366}
-				]
-			}, 
-			{
-				name: "第二关", 
-				lineColor: 0xe2e2e2, 
-				vertexColor: 0x6dc6c0, 
-				strokeColor: 0x416275, 
-				activeVertexColor: 0x6dc6c0, 
-				lines: [
-					{"x1": 240, "y1": 460, "x2": 654, "y2": 875},
-					{"x1": 654, "y1": 875, "x2": 100, "y2": 740}, 
-					{"x1": 100, "y1": 740, "x2": 240, "y2": 460}, 
-					{"x1": 240, "y1": 460, "x2": 515, "y2": 460}, 
-					{"x1": 515, "y1": 460, "x2": 654, "y2": 740}, 
-					{"x1": 654, "y1": 740, "x2": 100, "y2": 875}, 
-					{"x1": 100, "y1": 875, "x2": 515, "y2": 460}
-				]
-			}, 
-			{
-				name: "第三关", 
-				lineColor: 0xe2e2e2, 
-				vertexColor: 0xec6a74, 
-				strokeColor: 0x914748, 
-				activeVertexColor: 0xec6a74, 
-				lines: [
-					{"x1": 177, "y1": 367, "x2": 177, "y2": 961}, 
-					{"x1": 177, "y1": 961, "x2": 673, "y2": 861}, 
-					{"x1": 673, "y1": 861, "x2": 177, "y2": 367}, 
-					{"x1": 177, "y1": 367, "x2": 572, "y2": 367}, 
-					{"x1": 572, "y1": 367, "x2": 78, "y2": 861}, 
-					{"x1": 78, "y1": 861, "x2": 572, "y2": 961}, 
-					{"x1": 572, "y1": 961, "x2": 572, "y2": 367}
-				]
-			}, 
-			{
-				name: "第四关", 
-				src: "images/049.jpeg"
-			}, 
-			{
-				name: "第五关", 
-				src: "images/053.jpeg"
-			},
-			{
-				name: "第六关", 
-				src: "images/059.jpeg"
-			}, 
-			{
-				name: "第七关", 
-				src: "images/401.jpeg"
-			}
-		]
-	}
-); 
+  <body>
+    <div class="wrapper">
+      <!-- 关卡列表 -->
+      <ul class="levels index" id="levels">
+        <img class='img-title' src='../src/images/onion/cover_title.png' />
+        <img class='img-learn' src='../src/images/onion/cover_button_learn.png' onclick="watchVideo()" />
+        <img class='img-quiz' src='../src/images/onion/cover_button_quiz.png' />
+      </ul>
+      <div class="video-contain" id='contain'>
+        <video src='../src/video/1.mp4' controls id="video" width="420">
+          <!-- <source src="" type="video/mp4" /> -->
+        </video>
+      </div>
+      <div class="game" id="game">
+        <div class="game-back" id="gameBack"></div>
+        <canvas id="easel" width="375" height="603" class="easel"></canvas>
+        <!-- <div class="game-control">
+          <div class="game-control-reset">重新开始</div>
+          <div class="game-control-rollback">回退</div>
+        </div> -->
+        <div class='tip-bottom'>
+          <img id='img1' src='../src/images/onion/learn_bottom_tips_draw.png' />
+        </div>
+        <div class='tip-button' id='tipbutton'>
+          <img src='../src/images/onion/learn_button_able_to_draw.png' onclick='goOn()' />
+          <img class='second-img' src='../src/images/onion/learn_button_unable_to_draw.png' onclick="nextVideo()" />
+        </div>
+        <div class='tip-button' id='tipbutton1'>
+          <img src='../src/images/onion/learn_button_key_dots_1.png' />
+          <img class='second-img' src='../src/images/onion/learn_button_key_dots_2.png' onclick="nextWay()" />
+        </div>
+        <div class='three-button' id='three'>
+          <img src='../src/images/onion/learn_button_dots_6.png' onclick="nextStep()" />
+          <img class='second-button' src='../src/images/onion/learn_button_dots_7.png' />
+          <img class='third-button' src='../src/images/onion/learn_button_dots_8.png' />
+        </div>
+        <div class='tip-button' id='tipbutton2'>
+          <img class='special-one' src='../src/images/onion/quiz_button_skip.png' onclick='skip()' />
+          <img class='special-two' src='../src/images/onion/quiz_button_unable_to_draw.png' onclick='cantDraw()' />
+        </div>
+        <div id='share'>
+          <img src='../src/images/onion/share_bottom_buttons.png'>
+        </div>
+        <div id='pass' onclick='nextGame()'>
+          <img src='../src/images/onion/complete_contents.png'>
+        </div>
+      </divdiv>
+    </div>
+  </body>
+  <script type="text/javascript" src="script/lib/pixi.js"></script>
+  <script type="text/javascript" src="script/lib/gsap/TweenMax.js"></script>
+  <script type="text/javascript" src="script/onestroke.js"></script>
+  <script type="text/javascript">
+    let onestroke = new OneStroke({
+      // 默认的线段颜色与端点颜色
+      lineColor: 0x523fe1,
+      vertexColor: 0xfbe04b,
+      strokeColor: 0xfffed1,
+      activeVertexColor: 0xfbe04b,
+      levels: [
+        {
+          name: "",
+          lineColor: 0x523fe1,
+          vertexColor: 0xfbe04b,
+          strokeColor: 0xfffed1,
+          activeVertexColor: 0xfbe04b,
+          lines: [
+            { x1: 335, y1: 436, x2: 215, y2: 616 },
+            { x1: 215, y1: 616, x2: 375, y2: 736 },
+            { x1: 375, y1: 736, x2: 535, y2: 676 }
+          ]
+        },
+        {
+          name: "",
+          lineColor: 0x523fe1,
+          vertexColor: 0xfbe04b,
+          strokeColor: 0xfffed1,
+          activeVertexColor: 0xfbe04b,
+          lines: [
+            { x1: 196, y1: 606, x2: 375, y2: 726 },
+            { x1: 375, y1: 726, x2: 555, y2: 446 },
+            { x1: 555, y1: 446, x2: 195, y2: 606 }
+          ]
+        },
+        {
+          name: "",
+          lineColor: 0x523fe1,
+          vertexColor: 0xfbe04b,
+          strokeColor: 0xfffed1,
+          activeVertexColor: 0xfbe04b,
+          lines: [
+            { x1: 215, y1: 330, x2: 535, y2: 330 },
+            { x1: 215, y1: 330, x2: 255, y2: 450 },
+            { x1: 535, y1: 330, x2: 505, y2: 450 },
+            { x1: 255, y1: 450, x2: 505, y2: 450 },
+            { x1: 255, y1: 450, x2: 215, y2: 530 },
+            { x1: 505, y1: 450, x2: 535, y2: 530 },
+            { x1: 215, y1: 530, x2: 215, y2: 670 },
+            { x1: 535, y1: 530, x2: 535, y2: 670 },
+            { x1: 215, y1: 670, x2: 535, y2: 670 },
+            { x1: 215, y1: 530, x2: 535, y2: 530 }
+          ]
+        },
+        // {
+        //   name: "第四关",
+        //   src: "images/049.jpeg"
+        // },
+        {
+          name: "",
+          lineColor: 0x523fe1,
+          vertexColor: 0xfbe04b,
+          strokeColor: 0xfffed1,
+          activeVertexColor: 0xfbe04b,
+          lines: [
+            { x1: 255, y1: 310, x2: 235, y2: 500 },
+            { x1: 255, y1: 310, x2: 395, y2: 420 },
+            { x1: 235, y1: 500, x2: 245, y2: 670 },
+            { x1: 395, y1: 420, x2: 245, y2: 670 },
+            { x1: 395, y1: 420, x2: 545, y2: 520 },
+            { x1: 545, y1: 520, x2: 435, y2: 670 },
+            { x1: 245, y1: 670, x2: 435, y2: 670 }
+          ]
+        },
+        {
+          name: "",
+          lineColor: 0x523fe1,
+          vertexColor: 0xfbe04b,
+          strokeColor: 0xfffed1,
+          activeVertexColor: 0xfbe04b,
+          lines: [
+            { x1: 255, y1: 310, x2: 235, y2: 500 },
+            { x1: 255, y1: 310, x2: 395, y2: 420 },
+            { x1: 235, y1: 500, x2: 245, y2: 670 },
+            { x1: 395, y1: 420, x2: 245, y2: 670 },
+            { x1: 395, y1: 420, x2: 545, y2: 520 },
+            { x1: 545, y1: 520, x2: 435, y2: 670 },
+            { x1: 245, y1: 670, x2: 435, y2: 670 }
+          ]
+        },
+        {
+          name: "",
+          lineColor: 0x523fe1,
+          vertexColor: 0xfbe04b,
+          strokeColor: 0xfffed1,
+          activeVertexColor: 0xfbe04b,
+          lines: [
+            { x1: 445, y1: 250, x2: 175, y2: 440 },
+            { x1: 175, y1: 440, x2: 185, y2: 610 },
+            { x1: 185, y1: 610, x2: 445, y2: 250 },
+            { x1: 185, y1: 610, x2: 375, y2: 610 },
+            { x1: 375, y1: 610, x2: 485, y2: 460 },
+            { x1: 485, y1: 460, x2: 445, y2: 250 }
+          ]
+        },
+        {
+          name: "",
+          lineColor: 0x523fe1,
+          vertexColor: 0xfbe04b,
+          strokeColor: 0xfffed1,
+          activeVertexColor: 0xfbe04b,
+          lines: [
+            { x1: 445, y1: 250, x2: 175, y2: 440 },
+            { x1: 175, y1: 440, x2: 185, y2: 610 },
+            { x1: 185, y1: 610, x2: 445, y2: 250 },
+            { x1: 185, y1: 610, x2: 375, y2: 610 },
+            { x1: 375, y1: 610, x2: 485, y2: 460 },
+            { x1: 485, y1: 460, x2: 445, y2: 250 },
+            { x1: 175, y1: 440, x2: 485, y2: 460 }
+          ]
+        }
+      ]
+    });
 
-// 兼容大屏幕适配
-function fitEaselInfo() { 
-	onestroke.viewLeft = document.querySelector(".wrapper").getBoundingClientRect().left; 
-	onestroke.ratio = 375 / Math.min(document.body.clientWidth, 540); 
-}
-window.addEventListener("resize", fitEaselInfo); 
+    // 兼容大屏幕适配
+    function fitEaselInfo() {
+      onestroke.viewLeft = document
+        .querySelector(".wrapper")
+        .getBoundingClientRect().left;
+      onestroke.ratio = 375 / Math.min(document.body.clientWidth, 540);
+    }
+    window.addEventListener("resize", fitEaselInfo);
+    
+    fitEaselInfo();
 
-fitEaselInfo(); 
+    // 通关
+    onestroke.event.on("pass", function() {
+      console.log("通关");
+      pass.style.display = 'block'
+      // 进入下一关
+      // onestroke.next();
+    });
 
-// 通关
-onestroke.event.on("pass", function() {
-	console.log("通关"); 
-	// 进入下一关
-	onestroke.next(); 
-}); 
+    // 进入新的一关
+    onestroke.event.on("start", function(curLevel) {
+      gameBack.innerHTML = curLevel.name;
+    });
 
-// 进入新的一关
-onestroke.event.on("start", function(curLevel) {
-	gameBack.innerHTML = curLevel.name; 
-}); 
+    // gameover
+    onestroke.event.on("gameover", function() {
+      alert("GAMEOVER");
+    });
 
-// gameover
-onestroke.event.on("gameover", function() {
-	alert("GAMEOVER"); 
-}); 
+    // 关卡加载中
+    onestroke.event.on("level-loading", function() {
+      console.log("关卡" + onestroke.curLevel + " 加载中...");
+    });
 
-// 关卡加载中
-onestroke.event.on("level-loading", function() {
-	console.log("关卡" + onestroke.curLevel + " 加载中...")
-}); 
+    onestroke.event.on("level-loaded", function() {
+      console.log("关卡" + onestroke.curLevel + " 加载成功");
+    });
 
-onestroke.event.on("level-loaded", function() {
-	console.log("关卡" + onestroke.curLevel + " 加载成功")
-}); 
+    // showOneStroke
+    let showOneStroke = function() {
+      levels.style.transform = game.style.transform = "translate(-100%, 0)";
+    };
+    // 观看视频
+    let watchVideo = function () {
+      levels.style.transform = contain.style.transform = "translate(-100%, 0)";
+      video.play()
+    }
+    // 视频结束
+    video.addEventListener('ended', () => {
+      video.pause()
+      contain.style.transform = "translate(0, 0)";
+      levels.style.transform = game.style.transform = "translate(-100%, 0)";
+      img1.style.display = 'block'
+      if (Number(onestroke.curLevel) === 0) {
+        onestroke.enter(Number(onestroke.curLevel));
+      } else {
+        onestroke.next();
+        if (Number(onestroke.curLevel) === 2) {
+          tipbutton.style.display = 'block'
+          img1.src = '../src/images/onion/learn_bottom_tips_true or false.png'
+        } else if (Number(onestroke.curLevel) === 3) {
+          tipbutton.style.display = 'none'
+          three.style.display = 'block'
+          img1.src = '../src/images/onion/learn_bottom_tips_true or false_step1.png'
+        } else if (Number(onestroke.curLevel) === 4) {
+          tipbutton.style.display = 'none'
+          img1.src = '../src/images/onion/quiz_bottom_tips_draw.png'
+          tipbutton2.style.display = 'block'
+        }
+      }
+    })
 
-// showOneStroke
-let showOneStroke = function() {
-	levels.style.transform = game.style.transform = "translate(-100%, 0)"; 
-}
+    // hideOneStroke
+    let hideOneStroke = function() {
+      //   onestroke.enter(index);
+      levels.style.transform = game.style.transform = "translate(0, 0)";
+    };
 
-// hideOneStroke
-let hideOneStroke = function() {
-	levels.style.transform = game.style.transform = "translate(0, 0)"; 
-}
-
-// 进入对应的关卡
-let enter = function(index) { 
-	showOneStroke(); 
-	onestroke.enter(index); 
-}
-
-// 关卡列表初始化
-let initLevels = function() { 
-	let str = ''; 
-	onestroke.config.levels.forEach(
-		function(level, index) {
-			str += '<li class="level" onclick="enter(' + index + ')">\
-				<span class="level-no">' + (index + 1) + '</span>\
-				<span class="level-name">' + level.name + '</span>\
-				<div class="level-arrow"></div>\
-			</li>'
-		}
-	); 
-	levels.innerHTML = str; 
-	// 返回事件
-	gameBack.addEventListener("click", function() {hideOneStroke()}); 
-	// 重新开始
-	document.querySelector(".game-control-reset").addEventListener("click", function() {onestroke.restart()}); 
-	// 回退
-	document.querySelector(".game-control-rollback").addEventListener("click", function() { onestroke.rollback()}); 
-}
-// 调用初始化列表 
-initLevels(); 
-
-</script>
-
-
-
+    // 进入对应的关卡
+    let enter = function(index) {
+      showOneStroke();
+      onestroke.enter(index);
+    };
+    let nextGame = function () {
+      pass.style.display = 'none'
+      if (Number(onestroke.curLevel) === 0 || Number(onestroke.curLevel) !== 1) {
+        if (Number(onestroke.curLevel) !== 3) {
+          onestroke.next();
+        }
+      } else if (Number(onestroke.curLevel) === 1) {
+        video.src = './video/2.mp4'
+        hideOneStroke()
+        watchVideo()
+        // video.play()
+      }
+    }
+    let nextVideo = function () {
+      if (Number(onestroke.curLevel) === 2) {
+        video.src = './video/3.mp4'
+        hideOneStroke()
+        watchVideo()
+      }
+    }
+    let nextStep = function () {
+      three.style.display = 'none'
+      tipbutton1.style.display = 'block'
+      img1.src = '../src/images/onion/learn_bottom_tips_true or false_step2.png'
+      // .src='../src/images/onion/learn_button_able_to_draw.png'
+    }
+    let nextWay = function () {
+      tipbutton1.style.display = 'none'
+      tipbutton.style.display = 'block'
+      img1.src = '../src/images/onion/learn_bottom_tips_true or false.png'
+    }
+    let goOn = function () {
+      if (Number(onestroke.curLevel) === 3) {
+        video.src = './video/4.mp4'
+        hideOneStroke()
+        watchVideo()
+      }
+    }
+    let skip = function () {
+      if (Number(onestroke.curLevel) === 4) {
+        onestroke.next()
+      }
+    }
+    let cantDraw = function () {
+      if (Number(onestroke.curLevel) === 6) {
+        share.style.display = 'block'
+        gameBack.style.display = 'none'
+      }
+    }
+    // 关卡列表初始化
+    let initLevels = function() {
+      // let str = "";
+      // onestroke.config.levels.forEach(function(level, index) {
+      //   str +=
+      //     '<li class="level" onclick="enter(' +
+      //     index +
+      //     ')">\
+      //     			<span class="level-no">' +
+      //     (index + 1) +
+      //     '</span>\
+      //     			<span class="level-name">' +
+      //     level.name +
+      //     '</span>\
+      //     			<div class="level-arrow"></div>\
+      //     		</li>';
+      // });
+      // levels.innerHTML = str;
+      // 返回事件
+      gameBack.addEventListener("click", function() {
+        hideOneStroke();
+      });
+      // 重新开始
+      // document
+      //   .querySelector(".game-control-reset")
+      //   .addEventListener("click", function() {
+      //     onestroke.restart();
+      //   });
+      // 回退
+      // document
+      //   .querySelector(".game-control-rollback")
+      //   .addEventListener("click", function() {
+      //     onestroke.rollback();
+      //   });
+      //   enter(0);
+    };
+    // 调用初始化列表
+    initLevels();
+  </script>
 </html>
